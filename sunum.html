@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMW i5 eDrive40 - İnciroğlu Otomotiv</title>
+    <!-- Stil ve İkon Kütüphaneleri -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        body { 
+            background-color: #030712; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Premium Cam Efekti */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Alt Bilgi Cam Efekti */
+        .blur-footer {
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Neon Aura Efekti */
+        .neon-glow {
+            box-shadow: 0 0 80px -10px rgba(59, 130, 246, 0.25);
+        }
+        /* Arka Plan Hareketli Işık Katmanları */
+        .bg-glow-1 {
+            position: fixed; top: -10%; right: -10%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1; pointer-events: none;
+        }
+        .bg-glow-2 {
+            position: fixed; bottom: -10%; left: -10%; width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(147,51,234,0.08) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1; pointer-events: none;
+        }
+        /* Özel Kaydırma Çubuğu (Slider) Tasarımı */
+        input[type="range"] {
+            -webkit-appearance: none; appearance: none; background: #1f2937; height: 6px; border-radius: 999px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; width: 18px; height: 18px; 
+            border-radius: 50%; background: #2563eb; cursor: pointer;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8); transition: background 0.2s;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover { background: #3b82f6; }
+    </style>
+</head>
+<body class="text-gray-300 antialiased pb-44">
+
+    <!-- Dinamik Işık Katmanları -->
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
+    <!-- Üst Bar (Navigation) -->
+    <header class="border-b border-white/5 bg-black/20 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <!-- Sol Üst: İnciroğlu Otomotiv -->
+            <div class="flex items-center space-x-3.5">
+                <img class="w-8 h-8 object-contain" src="BMW_logo_(gray).svg.png" alt="BMW">
+                <div>
+                    <h2 class="text-base font-extrabold text-white tracking-widest">İNCİROĞLU OTOMOTİV</h2>
+                    <p class="text-[9px] text-blue-400 font-mono tracking-widest uppercase font-semibold">BMW YETKİLİ SATICI VE SERVİS</p>
+                </div>
+            </div>
+            <!-- Sağ Üst: BMW Genius -->
+            <div class="flex items-center space-x-3">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                <span class="text-[10px] font-mono tracking-widest text-gray-200 font-bold bg-blue-600/10 px-4 py-1.5 rounded-full border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                    BMW GENIUS M.Tugay KARSANTI
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ana Vitrin Başlığı -->
+    <main class="max-w-4xl mx-auto px-4 pt-12 space-y-10">
+        <div class="text-center space-y-2">
+            <span class="text-xs font-bold text-blue-500 tracking-widest uppercase font-mono bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/10">THE i5</span>
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">BMW i5 eDrive40</h1>
+            <p class="text-gray-400 text-xs md:text-sm max-w-2xl mx-auto font-light">Tamamen elektrikli iş sedanı segmentinin aerodinamik lideri. İnciroğlu Otomotiv dijital kataloğu için 2026 Türkiye spesifikasyonlarına göre yapılandırılmıştır.</p>
+        </div>
+
+        <!-- Büyük Ana Kart -->
+        <div class="glass-panel neon-glow rounded-3xl overflow-hidden shadow-2xl transition-all duration-500">
+            
+            <!-- Görünüm Seçim Çubuğu (Genişletilmiş İç / Dış Yapı) -->
+            <div class="flex bg-black/40 border-b border-white/5 p-2 space-x-2 text-xs font-bold tracking-wider">
+                <button onclick="switchVisual('view-dis')" id="btn-view-dis" class="flex-1 py-2 rounded-xl text-white bg-white/5 border border-white/10 transition-all">
+                    <i class="fas fa-car mr-2"></i>DIŞ GÖRÜNÜM
+                </button>
+                <button onclick="switchVisual('view-ic')" id="btn-view-ic" class="flex-1 py-2 rounded-xl text-gray-400 hover:text-white transition-all">
+                    <i class="fas fa-couch mr-2"></i>İÇ GÖRÜNÜM
+                </button>
+            </div>
+
+            <!-- Görsel Alanı -->
+            <div class="h-80 md:h-96 bg-gradient-to-b from-slate-950 to-transparent relative flex items-center justify-center p-4 overflow-hidden border-b border-white/5">
+                <div class="absolute w-64 h-64 rounded-full bg-blue-600/10 blur-[60px] pointer-events-none"></div>
+                
+                <span class="absolute top-4 left-4 bg-white/5 border border-white/10 text-[9px] font-mono font-bold tracking-widest text-gray-300 px-3 py-1 rounded-lg uppercase">
+                    KASA KODU: G60 BEV
+                </span>
+                
+                <!-- Dış Görünüm İmajı -->
+                <img id="img-dis" src="G60-bev.png" 
+                     alt="BMW i5 Dış Görünüm" 
+                     class="absolute max-h-[85%] max-w-[90%] object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.9)] transition-all duration-500 block hover:scale-[1.02]">
+                
+                <!-- İç Görünüm İmajı -->
+                <img id="img-ic" src="cosySec.jpg" 
+                     alt="BMW i5 İç Görünüm" 
+                     class="absolute w-full h-full object-cover transition-all duration-500 hidden opacity-0">
+            </div>
+
+            <!-- Kart Alt Detayları -->
+            <div class="p-6 md:p-8 space-y-6">
+                <!-- Sekme Butonları -->
+                <div class="flex bg-black/30 p-1 rounded-xl border border-white/5 space-x-1 text-xs font-semibold">
+                    <button onclick="switchTab(event, 'tab-genel')" class="tab-btn flex-1 py-2.5 rounded-lg text-white bg-blue-600 shadow-md transition-all">
+                        <i class="fas fa-layer-group mr-2 opacity-80"></i>Tasarım
+                    </button>
+                    <button onclick="switchTab(event, 'tab-teknik')" class="tab-btn flex-1 py-2.5 rounded-lg text-gray-400 hover:text-white transition-all">
+                        <i class="fas fa-charging-station mr-2 opacity-80"></i>Menzil & Şarj
+                    </button>
+                    <button onclick="switchTab(event, 'tab-motor')" class="tab-btn flex-1 py-2.5 rounded-lg text-gray-400 hover:text-white transition-all">
+                        <i class="fas fa-bolt mr-2 opacity-80"></i>Teknik Özellikler
+                    </button>
+                </div>
+
+                <!-- İçerik Alanları -->
+                <div class="bg-black/20 rounded-2xl p-5 border border-white/5 text-xs md:text-sm text-gray-300 leading-relaxed min-h-[110px] flex items-center">
+                    <div id="tab-genel" class="tab-panel block w-full">
+                        <p class="flex items-start text-gray-300"><i class="fas fa-info-circle text-blue-500 mt-0.5 mr-3 text-base"></i> <span>Kristal kesimli <strong>BMW Interaction Bar</strong>, ambiyans aydınlatması ile bütünleşik bir kokpit deneyimi sunar. Sürücü odaklı kavisli ekran yapısı iDrive 8.5 işletim sistemi ile kontrol sağlar.</span></p>
+                    </div>
+                    <div id="tab-teknik" class="tab-panel hidden w-full grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/5">
+                            <i class="fas fa-route text-cyan-400 text-lg"></i>
+                            <div><p class="text-[11px] text-gray-500 font-bold uppercase tracking-wider">WLTP MAKS. MENZİL</p><p class="text-white font-bold text-sm">627 KM</p></div>
+                        </div>
+                        <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/5">
+                            <i class="fas fa-microchip text-blue-400 text-lg"></i>
+                            <div><p class="text-[11px] text-gray-500 font-bold uppercase tracking-wider">BATARYA MİMARİSİ</p><p class="text-white font-bold text-sm">400 V / 81.2 kWh</p></div>
+                        </div>
+                        <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/5">
+                            <i class="fas fa-bolt text-amber-400 text-lg"></i>
+                            <div><p class="text-[11px] text-gray-500 font-bold uppercase tracking-wider">DC ŞARJ KAPASİTESİ</p><p class="text-white font-bold text-sm">205 kW</p></div>
+                        </div>
+                    </div>
+                    <div id="tab-motor" class="tab-panel hidden w-full grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/5">
+                            <i class="fas fa-horse-head text-indigo-400 text-lg"></i>
+                            <div><p class="text-[11px] text-gray-500 font-bold uppercase tracking-wider">MOTOR GÜCÜ</p><p class="text-white font-bold text-sm">218 BG</p></div>
+                        </div>
+                        <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/5">
+                            <i class="fas fa-gauge-high text-red-400 text-lg"></i>
+                            <div><p class="text-[11px] text-gray-500 font-bold uppercase tracking-wider">MAKSIMUM TORK</p><p class="text-white font-bold text-sm">400 Nm</p></div>
+                        </div>
+                        <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/5">
+                            <i class="fas fa-tachograph-digital text-emerald-400 text-lg"></i>
+                            <div><p class="text-[11px] text-gray-500 font-bold uppercase tracking-wider">AZAMİ HIZ</p><p class="text-white font-bold text-sm">193 km/s</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HESAPLAMA PANELLERI -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- 1. Şarj Paneli -->
+            <div class="glass-panel rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 bg-amber-500/10 rounded-xl border border-amber-500/20 text-amber-400"><i class="fas fa-charging-station text-base"></i></div>
+                        <div>
+                            <h4 class="text-sm font-extrabold text-white tracking-wide">Şarj Süresi Hesaplama</h4>
+                            <p class="text-[11px] text-gray-400">81.2 kWh / 400V Batarya Teknolojisi</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 pt-2">
+                        <div class="flex justify-between text-xs font-mono font-bold text-gray-400">
+                            <span>İSTASYON GÜCÜ</span>
+                            <span id="kwDisplay" class="text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">205 kW (Hızlı DC)</span>
+                        </div>
+                        <input type="range" id="chargeSlider" min="1" max="4" value="4" oninput="updateChargeLab()" class="w-full cursor-pointer">
+                        <div class="flex justify-between text-[10px] font-bold text-gray-600 font-mono">
+                            <span>11 kW AC</span>
+                            <span>22 kW AC</span>
+                            <span>50 kW DC</span>
+                            <span>205 kW DC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-black/40 rounded-xl p-4 border border-white/5 text-center flex justify-between items-center px-6">
+                    <span class="text-[10px] text-gray-500 uppercase font-black tracking-widest font-mono">%0 ➔ %100 SÜRE</span>
+                    <span id="timeOutput" class="text-xl font-black text-amber-400 font-mono tracking-tight">49 Dakika</span>
+                </div>
+            </div>
+
+            <!-- 2. Hız & Sıcaklık Paneli -->
+            <div class="glass-panel rounded-2xl p-6 flex flex-col justify-between space-y-4">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 bg-cyan-500/10 rounded-xl border border-cyan-500/20 text-cyan-400"><i class="fas fa-wind text-base"></i></div>
+                        <div>
+                            <h4 class="text-sm font-extrabold text-white tracking-wide">Hız & Sıcaklık Analizi</h4>
+                            <p class="text-[11px] text-gray-400">Sürüş şartlarının menzile etkisi</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Hız Sürgüsü -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-[11px] font-mono font-bold text-gray-400">
+                            <span>ORTALAMA HIZ</span>
+                            <span id="speedDisplay" class="text-cyan-400 font-bold">90 km/s</span>
+                        </div>
+                        <input type="range" id="speedSlider" min="50" max="190" step="10" value="90" oninput="updateAdvancedRange()" class="w-full cursor-pointer">
+                    </div>
+
+                    <!-- Sıcaklık Sürgüsü -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-[11px] font-mono font-bold text-gray-400">
+                            <span>DIŞ SICAKLIK</span>
+                            <span id="tempDisplay" class="text-orange-400 font-bold">20 °C</span>
+                        </div>
+                        <input type="range" id="tempSlider" min="-10" max="40" step="5" value="20" oninput="updateAdvancedRange()" class="w-full cursor-pointer">
+                    </div>
+                </div>
+
+                <div class="bg-black/40 rounded-xl p-3 border border-white/5 text-center flex justify-between items-center px-6">
+                    <span class="text-[10px] text-gray-500 uppercase font-black tracking-widest font-mono">MENZİL</span>
+                    <span id="advancedRangeOutput" class="text-xl font-black text-emerald-400 font-mono tracking-tight">627 KM</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Kurumsal Premium Alt Bilgi -->
+    <footer class="fixed bottom-0 left-0 right-0 z-50 blur-footer shadow-2xl">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="text-center sm:text-left">
+                <p class="text-[10px] text-gray-500 font-mono uppercase tracking-wider">Veri Dağıtım Altyapısı / 2026 Model Yılı</p>
+                <p class="text-[11px] text-gray-300 font-medium tracking-wide">Hesaplamalar Türkiye iklim ve yol şartlarına uyarlanmıştır.</p>
+            </div>
+            <div class="flex items-center space-x-3.5">
+                <div class="text-right">
+                    <span class="text-white font-extrabold text-sm tracking-widest block">İNCİROĞLU OTOMOTİV</span>
+                    <span class="text-[9px] text-gray-500 block font-mono tracking-wider">YETKİLİ SATICI VE SERVİS</span>
+                </div>
+                <img class="w-10 h-10 object-contain" src="BMW_logo_(gray).svg.png" alt="BMW">
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT ETKİLEŞİM MOTORU -->
+    <script>
+        // 1. Görünüm Değiştirme Motoru (İç / Dış)
+        function switchVisual(viewType) {
+            const imgDis = document.getElementById('img-dis');
+            const imgIc = document.getElementById('img-ic');
+            const btnDis = document.getElementById('btn-view-dis');
+            const btnIc = document.getElementById('btn-view-ic');
+
+            if (viewType === 'view-dis') {
+                imgIc.classList.add('opacity-0', 'hidden');
+                imgDis.classList.remove('hidden');
+                setTimeout(() => imgDis.classList.remove('opacity-0'), 50);
+                
+                btnDis.classList.add('text-white', 'bg-white/5', 'border-white/10');
+                btnDis.classList.remove('text-gray-400');
+                btnIc.classList.remove('text-white', 'bg-white/5', 'border-white/10');
+                btnIc.classList.add('text-gray-400');
+            } else {
+                imgDis.classList.add('opacity-0', 'hidden');
+                imgIc.classList.remove('hidden');
+                setTimeout(() => imgIc.classList.remove('opacity-0'), 50);
+                
+                btnIc.classList.add('text-white', 'bg-white/5', 'border-white/10');
+                btnIc.classList.remove('text-gray-400');
+                btnDis.classList.remove('text-white', 'bg-white/5', 'border-white/10');
+                btnDis.classList.add('text-gray-400');
+            }
+        }
+
+        // 2. Sekme Yönetimi
+        function switchTab(event, panelId) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.replace('block', 'hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('text-white', 'bg-blue-600', 'shadow-md');
+                b.classList.add('text-gray-400');
+            });
+            
+            document.getElementById(panelId).classList.replace('hidden', 'block');
+            event.currentTarget.classList.remove('text-gray-400');
+            event.currentTarget.classList.add('text-white', 'bg-blue-600', 'shadow-md');
+        }
+
+        // 3. Şarj Sürgüsü Yönetimi
+        function updateChargeLab() {
+            const step = document.getElementById('chargeSlider').value;
+            const kwDisplay = document.getElementById('kwDisplay');
+            const timeOutput = document.getElementById('timeOutput');
+            
+            if (step == "4") {
+                kwDisplay.innerText = "205 kW (Hızlı DC)";
+                timeOutput.innerText = "49 Dakika";
+            } else if (step == "3") {
+                kwDisplay.innerText = "50 kW (Hızlı DC)";
+                timeOutput.innerText = "1 Saat 38 Dk";
+            } else if (step == "2") {
+                kwDisplay.innerText = "22 kW (İş Yeri AC)";
+                timeOutput.innerText = "4 Saat 15 Dk";
+            } else if (step == "1") {
+                kwDisplay.innerText = "11 kW (Ev Tipi AC)";
+                timeOutput.innerText = "8 Saat 15 Dk";
+            }
+        }
+
+        // 4. Hız & Sıcaklık Menzil Algoritması
+        function updateAdvancedRange() {
+            const speed = parseInt(document.getElementById('speedSlider').value);
+            const temp = parseInt(document.getElementById('tempSlider').value);
+            
+            document.getElementById('speedDisplay').innerText = speed + " km/s";
+            document.getElementById('tempDisplay').innerText = temp + " °C";
+            
+            const baseRange = 627; 
+            
+            let speedFactor = 1.0;
+            if (speed > 90) {
+                speedFactor = 1.0 - ((speed - 90) * 0.0048); 
+            } else if (speed < 80) {
+                speedFactor = 0.95; 
+            }
+            
+            let tempFactor = 1.0;
+            if (temp < 15) {
+                tempFactor = 1.0 - ((15 - temp) * 0.005); 
+            } else if (temp > 28) {
+                tempFactor = 1.0 - ((temp - 28) * 0.003); 
+            }
+            
+            let finalRange = Math.round(baseRange * speedFactor * tempFactor);
+            if (finalRange < 180) finalRange = 180;
+
+            const rangeOutput = document.getElementById('advancedRangeOutput');
+            rangeOutput.innerText = finalRange + " KM";
+            
+            if (finalRange > 480) {
+                rangeOutput.className = "text-xl font-black text-emerald-400 font-mono tracking-tight";
+            } else if (finalRange > 320) {
+                rangeOutput.className = "text-xl font-black text-cyan-400 font-mono tracking-tight";
+            } else {
+                rangeOutput.className = "text-xl font-black text-orange-400 font-mono tracking-tight";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -93,33 +93,26 @@
         <!-- Büyük Ana Kart -->
         <div class="glass-panel neon-glow rounded-3xl overflow-hidden shadow-2xl transition-all duration-500">
             
-            <!-- Görünüm Seçim Çubuğu (Genişletilmiş İç / Dış Yapı) -->
+            <!-- Görünüm Seçim Çubuğu -->
             <div class="flex bg-black/40 border-b border-white/5 p-2 space-x-2 text-xs font-bold tracking-wider">
-                <button onclick="switchVisual('view-dis')" id="btn-view-dis" class="flex-1 py-2 rounded-xl text-white bg-white/5 border border-white/10 transition-all">
+                <button onclick="switchVisual('view-dis')" id="btn-view-dis" class="flex-1 py-2 rounded-xl text-gray-400 hover:text-white transition-all">
                     <i class="fas fa-car mr-2"></i>DIŞ GÖRÜNÜM
                 </button>
-                <button onclick="switchVisual('view-ic')" id="btn-view-ic" class="flex-1 py-2 rounded-xl text-gray-400 hover:text-white transition-all">
+                <button onclick="switchVisual('view-ic')" id="btn-view-ic" class="flex-1 py-2 rounded-xl text-white bg-white/5 border border-white/10 transition-all">
                     <i class="fas fa-couch mr-2"></i>İÇ GÖRÜNÜM
                 </button>
             </div>
 
-            <!-- Görsel Alanı -->
-            <div class="h-80 md:h-96 bg-gradient-to-b from-slate-950 to-transparent relative flex items-center justify-center p-4 overflow-hidden border-b border-white/5">
-                <div class="absolute w-64 h-64 rounded-full bg-blue-600/10 blur-[60px] pointer-events-none"></div>
-                
-                <span class="absolute top-4 left-4 bg-white/5 border border-white/10 text-[9px] font-mono font-bold tracking-widest text-gray-300 px-3 py-1 rounded-lg uppercase">
+            <!-- Görsel Alanı (Sadece cosySec.jpg kullanacak şekilde optimize edildi) -->
+            <div class="h-80 md:h-96 bg-gradient-to-b from-slate-950 to-transparent relative flex items-center justify-center overflow-hidden border-b border-white/5">
+                <span class="absolute top-4 left-4 z-10 bg-black/60 border border-white/10 text-[9px] font-mono font-bold tracking-widest text-gray-300 px-3 py-1 rounded-lg uppercase">
                     KASA KODU: G60 BEV
                 </span>
                 
-                <!-- Dış Görünüm İmajı -->
-                <img id="img-dis" src="G60-bev.png" 
-                     alt="BMW i5 Dış Görünüm" 
-                     class="absolute max-h-[85%] max-w-[90%] object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.9)] transition-all duration-500 block hover:scale-[1.02]">
-                
-                <!-- İç Görünüm İmajı -->
-                <img id="img-ic" src="cosySec.jpg" 
-                     alt="BMW i5 İç Görünüm" 
-                     class="absolute w-full h-full object-cover transition-all duration-500 hidden opacity-0">
+                <!-- Tek İmaj Yapısı -->
+                <img id="main-visual" src="cosySec.jpg" 
+                     alt="BMW i5 Görünüm" 
+                     class="w-full h-full object-cover transition-all duration-500">
             </div>
 
             <!-- Kart Alt Detayları -->
@@ -267,31 +260,17 @@
 
     <!-- JAVASCRIPT ETKİLEŞİM MOTORU -->
     <script>
-        // 1. Görünüm Değiştirme Motoru (İç / Dış)
+        // 1. Görünüm Yönetimi (Sadece tek görsel üzerinden buton durumları)
         function switchVisual(viewType) {
-            const imgDis = document.getElementById('img-dis');
-            const imgIc = document.getElementById('img-ic');
             const btnDis = document.getElementById('btn-view-dis');
             const btnIc = document.getElementById('btn-view-ic');
 
             if (viewType === 'view-dis') {
-                imgIc.classList.add('opacity-0', 'hidden');
-                imgDis.classList.remove('hidden');
-                setTimeout(() => imgDis.classList.remove('opacity-0'), 50);
-                
-                btnDis.classList.add('text-white', 'bg-white/5', 'border-white/10');
-                btnDis.classList.remove('text-gray-400');
-                btnIc.classList.remove('text-white', 'bg-white/5', 'border-white/10');
-                btnIc.classList.add('text-gray-400');
+                btnDis.className = "flex-1 py-2 rounded-xl text-white bg-white/5 border border-white/10 transition-all";
+                btnIc.className = "flex-1 py-2 rounded-xl text-gray-400 hover:text-white transition-all";
             } else {
-                imgDis.classList.add('opacity-0', 'hidden');
-                imgIc.classList.remove('hidden');
-                setTimeout(() => imgIc.classList.remove('opacity-0'), 50);
-                
-                btnIc.classList.add('text-white', 'bg-white/5', 'border-white/10');
-                btnIc.classList.remove('text-gray-400');
-                btnDis.classList.remove('text-white', 'bg-white/5', 'border-white/10');
-                btnDis.classList.add('text-gray-400');
+                btnIc.className = "flex-1 py-2 rounded-xl text-white bg-white/5 border border-white/10 transition-all";
+                btnDis.className = "flex-1 py-2 rounded-xl text-gray-400 hover:text-white transition-all";
             }
         }
 
